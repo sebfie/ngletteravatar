@@ -53,6 +53,7 @@ nla.directive('ngLetterAvatar', ['defaultSettings', function (defaultSettings) {
                     fontFamily: attrs.fontfamily || defaultSettings.fontFamily,
                     avatarBorderStyle: attrs.avatarcustomborder,
                     avatardefaultBorder: attrs.avatarborder,
+                    bgColor: attrs.bgColor,
                     defaultBorder: defaultSettings.defaultBorder,
                     shape: attrs.shape,
                     alphabetcolors: scope.alphabetcolors || defaultSettings.alphabetcolors
@@ -75,7 +76,9 @@ nla.directive('ngLetterAvatar', ['defaultSettings', function (defaultSettings) {
                 /**
                  * Populete the colors according to attributes
                  */
-                if (c.charCodeAt(0) < 65) {
+                if (params.bgColor) {
+                    color = params.bgColor;
+                } else if (c.charCodeAt(0) < 65) {
                     color = getRandomColors();
                 } else {
                     colorIndex = Math.floor((c.charCodeAt(0) - 65) % params.alphabetcolors.length);
@@ -109,7 +112,7 @@ nla.directive('ngLetterAvatar', ['defaultSettings', function (defaultSettings) {
     }]);
 
 /**
- * Get the random colors 
+ * Get the random colors
  * @returns {String}
  */
 function getRandomColors() {
